@@ -26,8 +26,8 @@ export class ProductsComponent {
         .pipe(
           map(data => data.content)
         );
-      this.firstSearch = false;
     }
+    this.firstSearch = false;
     this.currentPage = 1;
     this.searchText = searchValue;
   }
@@ -43,14 +43,15 @@ export class ProductsComponent {
   }
 
   getTotalPages(products: Product[]): number {
+    if (!products) return 0;
+
     const filteredProducts = products.filter(product =>
       this.searchText === '' || product.title.toLowerCase().includes(this.searchText)
     );
     let totalPages: number = Math.ceil(filteredProducts.length / this.productsPerPage);
-    if(totalPages > 0) return totalPages
-    return 1; 
+    if (totalPages > 0) return totalPages;
+    return 1;
   }
-    
 
   goToPage(page: number) {
     this.currentPage = page;

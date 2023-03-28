@@ -8,12 +8,16 @@ import { Component, EventEmitter, Output} from '@angular/core';
 
 export class ProductSearchComponent {
   enteredSearchValue : string = "";
+  timerId: any; 
 
   @Output()
   searchTextChanged: EventEmitter<string> = new EventEmitter<string>();
 
   onSearchTextChanged(){
-    this.searchTextChanged.emit(this.enteredSearchValue.toLowerCase()); 
+    clearTimeout(this.timerId); 
+    this.timerId = setTimeout(() => {
+      this.searchTextChanged.emit(this.enteredSearchValue.toLowerCase()); 
+    }, 150) 
   }
 
 }
