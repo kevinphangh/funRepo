@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Product } from '../../assets/products.d';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of} from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -11,7 +11,9 @@ import { map } from 'rxjs/operators';
 })
 
 export class ProductsComponent {
-  products: Observable<Product[]>;
+  currentPage: number = 1; 
+  productsPerPage: number = 10; 
+  products: Observable<Product[]> = of([]);
   searchText: string = '';
 
   constructor(private http: HttpClient) {
