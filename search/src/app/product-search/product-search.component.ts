@@ -13,7 +13,7 @@ export class ProductSearchComponent {
   searchTextChanged: EventEmitter<string> = new EventEmitter<string>();
 
   onSearchTextChanged(){
-    this.searchTextChanged.emit(this.enteredSearchValue); 
+    this.searchTextChanged.emit(this.enteredSearchValue.toLowerCase()); 
   }
 
 }
