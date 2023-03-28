@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ProductService } from './product-service/product.service';
-import { Product } from '../../assets/products';
+import { Product } from '../../assets/products.d';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',
@@ -9,14 +11,17 @@ import { Product } from '../../assets/products';
 })
 
 export class ProductsComponent {
-  products: Product[] = [];
+  products: Observable<Product[]>;
+  searchText: string = '';
 
-  constructor(private productService: ProductService) {}
+  constructor(private http: HttpClient) {
+    this.products = this.http.get<any>('assets/products.json')
+      .pipe(
+        map(data => data.content)
+      );
+  }
 
-  ngOnInit() {
-    this.productService.getProducts().subscribe((data) => {
-      this.products = data as Product[]; // use a type assertion to tell TypeScript that data is of type Product[]
-      console.log(this.products);
-    });
+  onSearchTextEntered(searchValue: string) {
+    this.searchText = searchValue;
   }
 }

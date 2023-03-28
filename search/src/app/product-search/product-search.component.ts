@@ -15,4 +15,5 @@ export class ProductSearchComponent {
   onSearchTextChanged(){
     this.searchTextChanged.emit(this.enteredSearchValue); 
   }
+
 }

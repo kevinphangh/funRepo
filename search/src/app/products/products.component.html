@@ -1,0 +1,16 @@
+<div>
+    <app-product-search (searchTextChanged)="onSearchTextEntered($event)"></app-product-search>
+</div>
+
+<ng-container *ngIf="products$ | async as products">
+<div *ngFor="let product of products">
+    <div class = "product-container" *ngIf="searchText === '' || product.title.toLowerCase().includes(searchText)">
+        <div class= "product-card">
+            <div>
+                <p>{{product.title}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+</ng-container>
+
