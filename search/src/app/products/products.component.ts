@@ -33,8 +33,11 @@ export class ProductsComponent {
   }
 
   filteredAndSlicedProducts(products: Product[]): Product[] {
+    const words = this.searchText.split(" ");
+    console.log(words);
+
     const filteredProducts = products.filter(product =>
-      this.searchText === '' || product.title.toLowerCase().includes(this.searchText)
+       words.every(word => product.title.toLowerCase().includes(word))
     );
     return filteredProducts.slice(
       (this.currentPage - 1) * this.productsPerPage,
